@@ -1,0 +1,16 @@
+@view-transition {
+  navigation: auto;
+}
+
+
+nav, section {
+  padding: 1rem;
+}
+
+.home {
+  background-color: hotpink;
+}
+
+.about {
+  background-color: lightblue;
+}
