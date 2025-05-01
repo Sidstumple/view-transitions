@@ -11,6 +11,6 @@ if (coolerChecked == 'true') {
 cooler.addEventListener('change', () => {
   localStorage.setItem('cooler', cooler.checked);
   console.log(localStorage.getItem('cooler'));
-  
+
   document.body.classList.toggle('cooler', cooler.checked);
 });

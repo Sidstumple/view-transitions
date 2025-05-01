@@ -2,7 +2,6 @@
   navigation: auto;
 }
 
-
 nav,
 section {
   padding: 1rem;
@@ -16,13 +15,12 @@ section {
   background-color: lightblue;
 }
 
-
-html:has(.cooler) {  
+html:has(.cooler) {
   /* Apply the custom animation to the old and new page states */
   &::view-transition-old(root) {
     animation: 0.4s ease-in both move-out;
   }
-  
+
   &::view-transition-new(root) {
     animation: 0.4s ease-in both move-in;
   }

@@ -1,0 +1,236 @@
+/* @keyframes moveDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(var(--scroll-height) - 100px));
+  }
+}
+.absolute-square {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-timeline: --header;
+  animation-name: moveDown;
+  animation-range: entry 100svh entry calc(var(--scroll-height));
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+} */
+
+.header {
+  view-timeline-name: --header;
+  --scroll-height: 200svh;
+
+  &.header--locations {
+    --background-1: #193768;
+    --background-2: #cf8773;
+    --background-3: #6c564b;
+    @supports (view-timeline: --header) {
+      animation-timeline: --header;
+      animation-name: changeBackgrounds;
+      animation-timing-function: var(--oof-bezier);
+      animation-range: entry
+        calc(100svh + var(--range-start) * var(--scroll-height)) entry
+        calc(100svh + var(--range-end) * var(--scroll-height));
+      animation-fill-mode: both;
+    }
+  }
+
+  .top .left h1,
+  .bottom {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (view-timeline: --header) {
+        animation-timeline: --header;
+        animation-name: fadeLight;
+        animation-timing-function: var(--oof-bezier);
+        animation-range: entry
+          calc(100svh + var(--range-start) * var(--scroll-height)) entry
+          calc(100svh + var(--range-end) * var(--scroll-height));
+        animation-fill-mode: both;
+      }
+    }
+  }
+
+  .media {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (view-timeline: --header) {
+        animation-timeline: --header;
+        animation-name: moveOutUp;
+        animation-timing-function: var(--oof-bezier);
+        animation-range: entry
+          calc(100svh + var(--range-start) * var(--scroll-height)) entry
+          calc(100svh + var(--range-end) * var(--scroll-height));
+        animation-fill-mode: both;
+      }
+    }
+  }
+
+  .img {
+    container-name: header-img;
+    container-type: inline-size;
+
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (view-timeline: --header) {
+        animation-timeline: --header;
+        transform: translateY(100svh);
+        animation-name: moveUp, clipOut;
+        clip-path: inset(0 5vw);
+
+        animation-timing-function: var(--oof-bezier);
+        animation-range: entry
+          calc(100svh + var(--range-start) * var(--scroll-height)) entry
+          calc(100svh + var(--range-end) * var(--scroll-height));
+        animation-fill-mode: both;
+      }
+    }
+
+    /* Reduced motion reset: */
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
+    img {
+      @media (prefers-reduced-motion: no-preference) {
+        @supports (view-timeline: --header) {
+          animation-timeline: --header;
+          animation-name: scaleIn;
+          animation-timing-function: var(--oof-bezier);
+          animation-range: entry
+            calc(100svh + var(--range-start) * var(--scroll-height)) entry
+            calc(100svh + var(--range-end) * var(--scroll-height));
+          animation-fill-mode: both;
+        }
+      }
+    }
+  }
+
+  .text {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (view-timeline: --header) {
+        opacity: 0;
+        scale: 0.95;
+        animation-timeline: --header;
+        animation-name: scaleFadeIn;
+        animation-timing-function: var(--oof-bezier);
+        animation-range: entry
+          calc(100svh + var(--range-start) * var(--scroll-height)) entry
+          calc(100svh + var(--range-end) * var(--scroll-height));
+        animation-fill-mode: both;
+      }
+    }
+  }
+}
+
+@keyframes clipOut {
+  0% {
+    clip-path: inset(0 5vw);
+  }
+
+  40%,
+  100% {
+    clip-path: inset(0 0);
+  }
+}
+
+@keyframes moveUp {
+  30% {
+    transform: translateY(0);
+  }
+
+  70% {
+    rotate: var(--rotate);
+  }
+
+  100% {
+    rotate: var(--rotate);
+    transform: translateY(0);
+  }
+}
+
+@keyframes moveOutUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    scale: 0.8;
+    transform: translateY(-100svh);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    scale: 1.5;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes scaleFadeIn {
+  0% {
+    opacity: 0;
+    scale: 0.95;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes fadeLight {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes changeBackgrounds {
+  0%,
+  35% {
+    background-color: var(--background-1);
+  }
+  40%,
+  65% {
+    background-color: var(--background-2);
+  }
+  70%,
+  90% {
+    background-color: var(--background-3);
+  }
+  95% {
+    background-color: var(--background);
+  }
+}
+
+/* .speakers {
+  
+  .speaker-card:nth-child(odd) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (view-timeline: --speakers) {
+        animation-timeline: view();
+        animation-name: parallaxUp;
+        animation-timing-function: var(--oof-bezier);
+      }
+    }
+  }
+
+} */
+
+@keyframes parallaxUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(10%);
+  }
+}
