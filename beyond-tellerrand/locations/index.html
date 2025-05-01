@@ -4,21 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Speaker Name - Beyond Tellerrand Düsseldorf 2025</title>
+    <title>Beyond Tellerand</title>
+    <script src="/assets/script.js" defer></script>
+    <script src="/assets/view-transitions.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
 
   <body>
-    <header class="header header--speaker">
+    <header
+      class="header header--locations"
+      style="--range-start: 0; --range-end: 0.75"
+    >
       <div class="inner">
         <div class="top">
-          <div class="left">
+          <div class="left" style="--range-start: 0.75; --range-end: 1">
             <h1 class="xlarge-heading">
               <span
                 ><svg
@@ -56,27 +62,43 @@
           </div>
           <nav class="xlarge-heading navigation">
             <button aria-label="Show navigation">+</button>
-            <ul>
-              <li>
-                <a href="/beyond-tellerand/"> /speakers </a>
+            <ul style="--total-items: 2">
+              <li style="--index: 0; --vt: nav-speakers">
+                <a href="/beyond-tellerrand/">
+                  /speakers
+                  <sup>12</sup>
+                </a>
               </li>
-              <li>
-                <a href="/beyond-tellerand/locations"> /locations </a>
+              <li class="show" style="--index: 1; --vt: nav-locations">
+                <p>/locations</p>
               </li>
             </ul>
           </nav>
         </div>
         <div class="media" style="--range-start: 0.6; --range-end: 1">
           <div
-            class="speaker-image"
-            style="
-              --vt: SPEAKER_SLUG;
-              --range-start: -0.5;
-              --range-end: 0.75;
-              --rotate: 0deg;
-            "
+            class="img"
+            style="--range-start: 0; --range-end: 0.25; --rotate: 2deg"
           >
-            <img src="SPEAKER_IMAGE_URL" alt="SPEAKER_NAME" />
+            <img src="/assets/img/capitol-theater.jpg" alt="Capitol Theater" />
+          </div>
+          <div
+            class="img"
+            style="--range-start: 0.25; --range-end: 0.5; --rotate: -1deg"
+          >
+            <img
+              src="/assets/img/bieb.jpeg"
+              alt="Image of maybe the Zentralbibliothek, could be any library to be honest"
+            />
+          </div>
+          <div
+            class="img"
+            style="--range-start: 0.5; --range-end: 0.75; --rotate: 3deg"
+          >
+            <img
+              src="/assets/img/wilhelmmarxhaus.jpg"
+              alt="Image of Wilhelm Marx Haus"
+            />
           </div>
         </div>
         <div
@@ -84,29 +106,31 @@
           style="--range-start: 0.75; --range-end: 1"
         >
           <p>
-            beyond tellerrand is the affordable single-track event where
-            creativity and technology meet. Taking place in Düsseldorf and
-            Berlin these days with 500+ attendees each in a renowned, familiar
-            and friendly atmosphere.
+            What could be a better start to an event than a start at which you
+            already know a handful of people attending the event? Exactly that
+            is the reason to join us for the Warm-Up.
           </p>
+          <p>
+            Mix and mingle with people who will be at beyond tellerrand on the
+            following two days, but also with people who join, but can not make
+            it to the show. They are invited to also mix with you, to exchange
+            and hang out.
+          </p>
+        </div>
+        <div class="bottom" style="--range-start: 0.75; --range-end: 1">
+          <div class="text-slider" style="--range-start: 0; --range-end: 0.75">
+            <p class="large-heading slide-title">
+              Capitol Theater (Event: Main Conference)
+            </p>
+            <p class="large-heading slide-title">
+              Neue Zentralbibliothek (Event: Workshop)
+            </p>
+            <p class="large-heading slide-title">CHECK24 (Event: Warm-Up)</p>
+          </div>
         </div>
       </div>
     </header>
 
-    <main class="main">
-      <section class="speaker-detail">
-        <div class="speaker-info">
-          <h2 class="xlarge-heading">SPEAKER_NAME</h2>
-          <h3 class="large-heading">TALK_TITLE</h3>
-          <div class="speaker-bio">
-            <p>SPEAKER_BIO</p>
-          </div>
-          <div class="speaker-links">
-            <a href="SPEAKER_WEBSITE" class="medium-body">Website</a>
-            <a href="SPEAKER_SOCIAL" class="medium-body">Social Media</a>
-          </div>
-        </div>
-      </section>
-    </main>
+    <main class="main"></main>
   </body>
 </html>

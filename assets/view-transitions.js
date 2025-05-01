@@ -13,13 +13,13 @@ const determineTransitionType = (from, to) => {
   targetPath = targetPath.replace('/index.html', '').replace('.html', '')
   console.log({currentPath, targetPath})
   if (
-    currentPath === '/beyond-tellerand/' &&
-    targetPath.includes('/beyond-tellerand/speakers/')
+    currentPath === '/beyond-tellerrand/' &&
+    targetPath.includes('/beyond-tellerrand/speakers/')
   ) {
     return {name: 'overview-to-speaker'}
   } else if (
-    currentPath.includes('/beyond-tellerand/speakers/') &&
-    targetPath === '/beyond-tellerand/'
+    currentPath.includes('/beyond-tellerrand/speakers/') &&
+    targetPath === '/beyond-tellerrand/'
   ) {
     return {name: 'speaker-to-overview', currentPath}
   } else {
