@@ -205,6 +205,10 @@ p+p {
 
     .prev-speaker,
     .next-speaker {
+      /* HIER */
+      /* display: none; */
+
+      
       grid-column: span 4;
       position: absolute;
       top: 0;
