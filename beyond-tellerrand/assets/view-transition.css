@@ -2,19 +2,18 @@
   navigation: auto;
 }
 
-:root {
+/* :root {
   --ease: cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 [style*='--vt'] {
   view-transition-name: var(--vt);
-}
+} */
 
 
 
-html:active-view-transition-type(overview-to-speaker),
+/* html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
-
   &::view-transition-new(root),
   &::view-transition-old(root) {
     animation-duration: 0.1s;
@@ -64,17 +63,16 @@ html:active-view-transition-type(speaker-to-overview) {
     overflow: clip;
     object-fit: cover;
   }
+} */
 
-}
-
-html:active-view-transition-type(overview-to-speaker) {
+/* html:active-view-transition-type(overview-to-speaker) {
   &::view-transition-new(.active-speaker) {
     display: none;
   }
-}
+} */
 
 
-html:active-view-transition-type(speaker-to-overview) {
+/* html:active-view-transition-type(speaker-to-overview) {
 
   &::view-transition-old(.speaker-image),
   &::view-transition-old(.active-speaker) {
@@ -91,9 +89,7 @@ html:active-view-transition-type(speaker-to-overview) {
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
   }
-
-
-}
+} */
 
 @keyframes scale-down {
   to {
@@ -110,7 +106,7 @@ html:active-view-transition-type(speaker-to-overview) {
 
 
 
-.prev-speaker {
+/* .prev-speaker {
   view-transition-class: prev-speaker;
 }
 
@@ -161,7 +157,7 @@ html:active-view-transition-type(speaker-to-overview) {
   &::view-transition-old(.prev-speaker):only-child {
     --x: -30vh;
   }
-}
+} */
 
 @keyframes moveIn {
   from {

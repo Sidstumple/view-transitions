@@ -9,22 +9,12 @@ const determineTransitionType = (from, to) => {
   currentPath = currentPath.replace('/index.html', '').replace('.html', '').replace('/view-transitions', '')
   targetPath = targetPath.replace('/index.html', '').replace('.html', '').replace('/view-transitions', '')
 
-  console.log(currentPath, targetPath)  
-  if (
-    currentPath === '/beyond-tellerrand/' &&
-    targetPath.includes('/beyond-tellerrand/speakers/')
-  ) {
+  if (isOverview(currentPath) && isSpeaker(targetPath)) {
     return {name: 'overview-to-speaker'}
-  } else if (
-    currentPath.includes('/beyond-tellerrand/speakers/') &&
-    targetPath === '/beyond-tellerrand/'
-  ) {
+  } else if (isSpeaker(currentPath) && isOverview(targetPath)) {
     currentPath = currentPath.replace('/beyond-tellerrand/speakers/', '')
     return {name: 'speaker-to-overview', currentPath}
-  } else if (
-    currentPath.includes('/beyond-tellerrand/speakers/') &&
-    targetPath.includes('/beyond-tellerrand/speakers/')
-  ) {
+  } else if (isSpeaker(currentPath) && isSpeaker(targetPath)) {
     return {name: 'speaker-to-speaker', currentPath, targetPath}
   } else {
     return {name: 'normal'}
@@ -58,3 +48,12 @@ window.addEventListener('pagereveal', async (e) => {
     }
   }
 })
+
+
+const isOverview = (path) => {
+  return path === '/beyond-tellerrand/' || path === '/beyond-tellerrand'
+}
+
+const isSpeaker = (path) => {
+  return path.includes('/beyond-tellerrand/speakers/')
+}
