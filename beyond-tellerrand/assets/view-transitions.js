@@ -6,8 +6,8 @@ const determineTransitionType = (from, to) => {
   let currentPath = currentUrl.pathname
   let targetPath = targetUrl.pathname
   // remove index.html and .html from paths
-  currentPath = currentPath.replace('/index.html', '').replace('.html', '')
-  targetPath = targetPath.replace('/index.html', '').replace('.html', '')
+  currentPath = currentPath.replace('/index.html', '').replace('.html', '').replace('/view-transitions', '')
+  targetPath = targetPath.replace('/index.html', '').replace('.html', '').replace('/view-transitions', '')
   console.log({currentPath, targetPath})
   if (
     currentPath === '/beyond-tellerrand/' &&
