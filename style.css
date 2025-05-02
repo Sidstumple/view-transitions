@@ -15,6 +15,10 @@ section {
   background-color: lightblue;
 }
 
+.switch-to-view-timeline {
+  padding: 1rem;
+}
+
 html:has(.cooler) {
   /* Apply the custom animation to the old and new page states */
   &::view-transition-old(root) {

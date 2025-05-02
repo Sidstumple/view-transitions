@@ -22,7 +22,7 @@
 
 .header {
   view-timeline-name: --header;
-  --scroll-height: 200svh;
+  
 
   &.header--locations {
     --background-1: #193768;
@@ -122,6 +122,18 @@
       }
     }
   }
+  .text-slider {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (view-timeline: --header) {
+        animation-timeline: --header;
+        animation-name: slideIn;
+        animation-range: entry
+          calc(100svh + var(--range-start) * var(--scroll-height)) entry
+          calc(100svh + var(--range-end) * var(--scroll-height));
+        animation-fill-mode: both;
+      }
+    }
+  }
 }
 
 @keyframes clipOut {
@@ -211,20 +223,6 @@
   }
 }
 
-/* .speakers {
-  
-  .speaker-card:nth-child(odd) {
-    @media (prefers-reduced-motion: no-preference) {
-      @supports (view-timeline: --speakers) {
-        animation-timeline: view();
-        animation-name: parallaxUp;
-        animation-timing-function: var(--oof-bezier);
-      }
-    }
-  }
-
-} */
-
 @keyframes parallaxUp {
   0% {
     transform: translateY(0);
@@ -232,5 +230,23 @@
 
   100% {
     transform: translateY(10%);
+  }
+}
+
+
+@keyframes slideIn {
+  0%,
+  33% {
+    transform: translateX(0);
+  }
+
+  40%,
+  66% {
+    transform: translateX(-80vw);
+  }
+
+  80%,
+  100% {
+    transform: translateX(-160vw);
   }
 }

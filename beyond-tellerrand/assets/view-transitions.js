@@ -1,6 +1,3 @@
-// // Get the navigation object
-// const navigation = window.navigation
-
 const determineTransitionType = (from, to) => {
   // Only run this if an active view transition exists
   const currentUrl = from?.url ? new URL(from.url) : null
@@ -8,7 +5,7 @@ const determineTransitionType = (from, to) => {
   // get paths:
   let currentPath = currentUrl.pathname
   let targetPath = targetUrl.pathname
-  // remove index.html from paths
+  // remove index.html and .html from paths
   currentPath = currentPath.replace('/index.html', '').replace('.html', '')
   targetPath = targetPath.replace('/index.html', '').replace('.html', '')
   console.log({currentPath, targetPath})
@@ -21,6 +18,7 @@ const determineTransitionType = (from, to) => {
     currentPath.includes('/beyond-tellerrand/speakers/') &&
     targetPath === '/beyond-tellerrand/'
   ) {
+    currentPath = currentPath.replace('/beyond-tellerrand/speakers/', '')
     return {name: 'speaker-to-overview', currentPath}
   } else {
     return {name: 'normal'}
@@ -37,20 +35,18 @@ window.addEventListener('pagereveal', async (e) => {
       // eslint-disable-next-line no-undef
       transitionType = determineTransitionType(navigation.activation.from, navigation.activation.entry)
       if (transitionType.name === 'speaker-to-overview') {
+        console.log('speaker-to-overview', transitionType.currentPath)
         activeSpeaker = document.querySelector(`.speaker-card a[href*="${transitionType.currentPath}"]`)
-        console.log('activeSpeaker', activeSpeaker)
         if (activeSpeaker) {
-          console.log('speaker-to-overview', activeSpeaker)
           activeSpeaker = activeSpeaker.closest('.speaker-card').querySelector('img')
           activeSpeaker.style.viewTransitionClass = 'active-speaker'
         }
       }
     }
-    document.documentElement.dataset.transition = transitionType.name
+    e.viewTransition.types.add(transitionType.name)
 
     // Cleanup after transition ran
     await e.viewTransition.finished
-    delete document.documentElement.dataset.transition
     if (activeSpeaker) {
       activeSpeaker.style.viewTransitionClass = ''
     }
