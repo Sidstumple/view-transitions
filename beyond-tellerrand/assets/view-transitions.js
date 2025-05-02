@@ -43,10 +43,12 @@ window.addEventListener('pagereveal', async (e) => {
         }
       }
     }
-    e.viewTransition.types.add(transitionType.name)
+    // e.viewTransition.types.add(transitionType.name)
+    document.documentElement.dataset.transition = transitionType.name
 
     // Cleanup after transition ran
     await e.viewTransition.finished
+    delete document.documentElement.dataset.transition
     if (activeSpeaker) {
       activeSpeaker.style.viewTransitionClass = ''
     }

@@ -60,7 +60,8 @@ html::view-transition-old(.active-speaker) {
   z-index: 1;
   } */
 
-:active-view-transition-type(overview-to-speaker) {
+/* :active-view-transition-type(overview-to-speaker) { */
+[data-transition="overview-to-speaker"] {
   .speaker-image {
     view-transition-class: active-speaker;
   }
@@ -71,8 +72,8 @@ html::view-transition-old(.active-speaker) {
 }
 
 
-:active-view-transition-type(speaker-to-overview) {
-
+/* :active-view-transition-type(speaker-to-overview) { */
+[data-transition="speaker-to-overview"] {
 
   &::view-transition-old(.speaker-image) {
     display: none;
