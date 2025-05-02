@@ -206,7 +206,7 @@ p+p {
     .prev-speaker,
     .next-speaker {
       /* HIER */
-      /* display: none; */
+      display: none;
 
       
       grid-column: span 4;

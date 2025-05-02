@@ -11,13 +11,13 @@ const determineTransitionType = (from, to) => {
 
   console.log(currentPath, targetPath)  
   if (
-    currentPath === '/beyond-tellerrand' &&
+    currentPath === '/beyond-tellerrand/' &&
     targetPath.includes('/beyond-tellerrand/speakers/')
   ) {
     return {name: 'overview-to-speaker'}
   } else if (
     currentPath.includes('/beyond-tellerrand/speakers/') &&
-    targetPath === '/beyond-tellerrand'
+    targetPath === '/beyond-tellerrand/'
   ) {
     currentPath = currentPath.replace('/beyond-tellerrand/speakers/', '')
     return {name: 'speaker-to-overview', currentPath}
@@ -48,6 +48,7 @@ window.addEventListener('pagereveal', async (e) => {
         }
       }
     }
+    console.log(transitionType)
     e.viewTransition.types.add(transitionType.name)
 
     // Cleanup after transition ran

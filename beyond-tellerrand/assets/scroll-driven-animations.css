@@ -50,7 +50,7 @@
   .prev-speaker {
     @media (prefers-reduced-motion: no-preference) {
       @supports (view-timeline: --header) {
-        --x: 60vh;
+        --x: 0vh;
         animation-timeline: --header;
         animation-name: move-out-of-view;
         animation-timing-function: var(--oof-bezier);
@@ -62,7 +62,7 @@
     }
   }
   .prev-speaker {
-    --x: -60vh;
+    --x: -0vh;
   }
   .img {
     container-name: header-img;
