@@ -9,14 +9,15 @@ const determineTransitionType = (from, to) => {
   currentPath = currentPath.replace('/index.html', '').replace('.html', '').replace('/view-transitions', '')
   targetPath = targetPath.replace('/index.html', '').replace('.html', '').replace('/view-transitions', '')
 
+  console.log(currentPath, targetPath)  
   if (
-    currentPath === '/beyond-tellerrand/' &&
+    currentPath === '/beyond-tellerrand' &&
     targetPath.includes('/beyond-tellerrand/speakers/')
   ) {
     return {name: 'overview-to-speaker'}
   } else if (
     currentPath.includes('/beyond-tellerrand/speakers/') &&
-    targetPath === '/beyond-tellerrand/'
+    targetPath === '/beyond-tellerrand'
   ) {
     currentPath = currentPath.replace('/beyond-tellerrand/speakers/', '')
     return {name: 'speaker-to-overview', currentPath}
@@ -40,7 +41,6 @@ window.addEventListener('pagereveal', async (e) => {
       // eslint-disable-next-line no-undef
       transitionType = determineTransitionType(navigation.activation.from, navigation.activation.entry)
       if (transitionType.name === 'speaker-to-overview') {
-        console.log('speaker-to-overview', transitionType.currentPath)
         activeSpeaker = document.querySelector(`.speaker-card a[href*="${transitionType.currentPath}"]`)
         if (activeSpeaker) {
           activeSpeaker = activeSpeaker.closest('.speaker-card').querySelector('img')
