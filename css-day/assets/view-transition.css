@@ -7,13 +7,19 @@
   --ease-out: cubic-bezier(0.61, 1, 0.88, 1);
 }
 
+html::view-transition-group(*),
+html::view-transition-old(*),
+html::view-transition-new(*) {
+  animation-fill-mode: both !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   [style*='--vt'] {
     view-transition-name: var(--vt);
   }
 
   .speaker-card,
-  .speaker-header-image {
+  .speaker-header-image img {
     view-transition-class: speaker-card;
   }
 
@@ -21,11 +27,23 @@
     [style*='--vt'] {
       view-transition-class: code-prop-value;
     }
+
+    @media (max-width: 1024px) {
+      [style*='--vt'] {
+        view-transition-name: none;
+      }
+    }
+
     [style*='--vt: code-semicolon'],
     [style*='--vt: code-colon'],
     [style*='--vt: code-open-bracket'] {
       view-transition-class: code-character;
     }
+  }
+
+  .large-titles .title,
+  .large-titles .talk-title {
+    view-transition-class: text-animation;
   }
 }
 
@@ -41,13 +59,14 @@ html:active-view-transition-type(title-animation) {
 
 }
 
+
+&::view-transition-group(.text-animation) {
+  z-index: 1;
+}
+
 html:active-view-transition-type(title-animation),
 html:active-view-transition-type(speaker-to-overview) {
 
-  .speakers .title,
-  .speakers .talk-title {
-    view-transition-class: text-animation;
-  }
 
   &::view-transition-group(.text-animation) {
     mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
@@ -108,10 +127,18 @@ html:active-view-transition-type(speaker-to-overview) {
 
 html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
+
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 0.1s;
+    animation-delay: 0.6s;
+    animation-timing-function: var(--ease);
+  }
+
+  /* SPEAKER CARD */
   &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
     animation-timing-function: var(--ease);
-    animation-fill-mode: both;
     overflow: hidden;
   }
 
@@ -122,62 +149,44 @@ html:active-view-transition-type(speaker-to-overview) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   &::view-transition-old(.speaker-card):only-child {
     animation-name: scale-out;
     animation-duration: 0.3s;
+    animation-delay: calc(var(--index) * 0.03s);
     animation-timing-function: var(--ease);
-    animation-fill-mode: both;
     opacity: 1;
   }
 
   &::view-transition-new(.speaker-card):only-child {
     animation-name: scale-in;
     animation-duration: 0.3s;
-    animation-delay: 0.35s;
+    animation-delay: calc(var(--index) * 0.03s + 0.35s);
     animation-timing-function: var(--ease);
-    animation-fill-mode: both;
     opacity: 1;
   }
-  
-  
+
+  /* TEXT ANIMATION */
+  &::view-transition-group(.text-animation) {
+    animation-duration: 0.3s;
+    animation-delay: 0.3s;
+    animation-timing-function: var(--ease);
+  }
+
+  /* CODE */
   &::view-transition-group(.code-prop-value) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0s;
-    animation-fill-mode: both;
   }
-  
+
   &::view-transition-group(.code-character) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0.05s;
-    animation-fill-mode: both;
   }
 
-  &::view-transition-group(code-class),
-  &::view-transition-group(code-open-bracket) {
-    --delay: 0.05s;
-  }
-  &::view-transition-group(code-property-1),
-  &::view-transition-group(code-value-1),
-  &::view-transition-group(code-colon-1),
-  &::view-transition-group(code-semicolon-1) {
-    --delay: 0.05s;
-  }
 
-  &::view-transition-group(code-property-2),
-  &::view-transition-group(code-value-2),
-  &::view-transition-group(code-colon-2),
-  &::view-transition-group(code-semicolon-2) {
-    --delay: 0.1s;
-  }
-  
-  &::view-transition-group(code-property-3),
-  &::view-transition-group(code-value-3),
-  &::view-transition-group(code-colon-3),
-  &::view-transition-group(code-semicolon-3) {
-    --delay: 0.15s;
-  }
   /* Thanks Jake! 🙏 https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/ */
   &::view-transition-old(.code-prop-value),
   &::view-transition-new(.code-prop-value) {
@@ -191,7 +200,7 @@ html:active-view-transition-type(speaker-to-overview) {
     animation-duration: 0.4s;
     animation-timing-function: var(--ease);
   }
-  
+
   &::view-transition-new(.code-prop-value) {
     animation-name: clip-to-right;
     animation-delay: calc(var(--delay) + 0.4s);
@@ -206,7 +215,7 @@ html:active-view-transition-type(speaker-to-overview) {
 html:active-view-transition-type(overview-to-speaker) {
   &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
-    animation-delay: 0.1s;
+    animation-delay: calc(var(--index) * 0.05s + 0.1s);
   }
 
   &::view-transition-old(.speaker-card) {
@@ -217,7 +226,14 @@ html:active-view-transition-type(overview-to-speaker) {
 
 html:active-view-transition-type(speaker-to-overview) {
   --ease: var(--ease-out);
-  
+
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 0.1s;
+    animation-delay: 0.1s;
+    animation-timing-function: var(--ease);
+  }
+
   &::view-transition-new(.speaker-card) {
     opacity: 0;
     animation: none;
@@ -247,6 +263,7 @@ html:active-view-transition-type(speaker-to-overview) {
   from {
     clip-path: inset(0 100% 0 0);
   }
+
   to {
     clip-path: inset(0 0 0 0);
   }
@@ -256,7 +273,111 @@ html:active-view-transition-type(speaker-to-overview) {
   from {
     clip-path: inset(0 0 0 0);
   }
+
   to {
     clip-path: inset(0 100% 0 0);
   }
+}
+
+
+
+
+
+
+/* The nasty stuff 🤡 */
+/* Would love to be able to do this with sibling index somehow 😎 */
+::view-transition-group(stephen-hay) {
+  --index: 0;
+}
+
+::view-transition-group(rachel-andrew) {
+  --index: 1;
+}
+
+::view-transition-group(ahmad-shadeed) {
+  --index: 2;
+}
+
+::view-transition-group(adam-argyle) {
+  --index: 3;
+}
+
+::view-transition-group(brad-frost) {
+  --index: 4;
+}
+
+::view-transition-group(tim-nguyen) {
+  --index: 5;
+}
+
+::view-transition-group(john-allsopp) {
+  --index: 6;
+}
+
+::view-transition-group(ian-frost) {
+  --index: 7;
+}
+
+::view-transition-group(amit-sheen) {
+  --index: 8;
+}
+
+::view-transition-group(miriam-suzanne) {
+  --index: 9;
+}
+
+::view-transition-group(bramus-van-damme) {
+  --index: 10;
+}
+
+::view-transition-group(ana-rodrigues) {
+  --index: 11;
+}
+
+::view-transition-group(cyd-stumpel) {
+  --index: 12;
+}
+
+::view-transition-group(chris-coyier) {
+  --index: 13;
+}
+
+::view-transition-group(hidde-de-vries) {
+  --index: 14;
+}
+
+::view-transition-group(brecht-de-ruyte) {
+  --index: 15;
+}
+
+::view-transition-group(bruce-lawson) {
+  --index: 16;
+}
+
+/* More nasty stuff: 🤡 */
+
+&::view-transition-group(code-class),
+&::view-transition-group(code-open-bracket) {
+  --delay: 0.05s;
+}
+
+&::view-transition-group(code-property-1),
+&::view-transition-group(code-value-1),
+&::view-transition-group(code-colon-1),
+&::view-transition-group(code-semicolon-1) {
+  --delay: 0.05s;
+}
+
+&::view-transition-group(code-property-2),
+&::view-transition-group(code-value-2),
+&::view-transition-group(code-colon-2),
+&::view-transition-group(code-semicolon-2) {
+  --delay: 0.1s;
+}
+
+&::view-transition-group(code-property-3),
+&::view-transition-group(code-value-3),
+&::view-transition-group(code-colon-3),
+&::view-transition-group(code-semicolon-3) {
+  --delay: 0.15s;
 }

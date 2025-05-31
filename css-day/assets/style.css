@@ -46,7 +46,7 @@ button {
 }
 
 .xlarge-heading {
-  font-size: max(2rem, calc(96 / var(--design-size) * 100vw));
+  font-size: clamp(2rem, calc(96 / var(--design-size) * 100vw), 8rem);
   font-weight: 400;
   font-variation-settings:
     'wght' 400;
@@ -54,7 +54,7 @@ button {
 }
 
 .large-heading {
-  font-size: max(1.1rem, calc(60 / var(--design-size) * 100vw));
+  font-size: clamp(1.1rem, calc(60 / var(--design-size) * 100vw), 5rem);
   font-weight: 400;
   font-variation-settings:
     'wght' 350;
@@ -62,7 +62,7 @@ button {
 }
 
 .medium-heading {
-  font-size: max(1.5rem, calc(32 / var(--design-size) * 100vw));
+  font-size: clamp(1.5rem, calc(32 / var(--design-size) * 100vw), 2.7rem);
   font-weight: 400;
   font-variation-settings:
     'wght' 350;
@@ -70,7 +70,7 @@ button {
 }
 
 .large-body {
-  font-size: max(1.2rem, calc(24 / var(--design-size) * 100vw));
+  font-size: clamp(1.2rem, calc(24 / var(--design-size) * 100vw), 2rem);
   font-weight: 400;
   font-variation-settings:
     'wght' 350;
@@ -78,7 +78,7 @@ button {
 }
 
 .medium-body {
-  font-size: max(1.1rem, calc(18 / var(--design-size) * 100vw));
+  font-size: clamp(1.1rem, calc(18 / var(--design-size) * 100vw), 1.5rem);
   font-weight: 400;
   font-variation-settings:
     'wght' 350;
@@ -86,7 +86,7 @@ button {
 }
 
 .small-body {
-  font-size: max(0.8rem, calc(16 / var(--design-size) * 100vw));
+  font-size: clamp(0.8rem, calc(16 / var(--design-size) * 100vw), 1.33rem);
   font-weight: 400;
   font-variation-settings:
     'wght' 350;
@@ -123,6 +123,11 @@ p+p {
   @media (max-width: 1280px) {
     gap: var(--padding);
   }
+
+  @media (max-width: 1024px) {
+    position: relative;
+    padding: 0;
+  }
 }
 
 .speakers-left {
@@ -134,8 +139,8 @@ p+p {
 
   @media (max-width: 1024px) {
     pointer-events: none;
-    width: 100%;
     position: fixed;
+    inset: 0;
   }
 
   .date {
@@ -170,6 +175,7 @@ p+p {
     @media (prefers-reduced-motion: no-preference) {
       view-transition-name: title;
     }
+
     padding-bottom: 1rem;
   }
 
@@ -177,6 +183,7 @@ p+p {
     @media (prefers-reduced-motion: no-preference) {
       view-transition-name: talk-title;
     }
+
     padding-bottom: 1rem;
   }
 }
@@ -187,6 +194,10 @@ p+p {
   gap: var(--padding-small);
   width: 50vw;
   view-timeline-name: --speakers-grid;
+
+  @media (max-width: 1024px) {
+    padding: var(--padding-small);
+  }
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -204,14 +215,21 @@ p+p {
   display: flex;
   flex-direction: column;
   gap: var(--padding-small);
-
+  /* I tried using sibling index but it didn't work 🤷🏻‍♀️: */
+  --column-delay: 0.1s;
   @media (prefers-reduced-motion: no-preference) {
-    &:nth-child(2) {
-      position: sticky;
-      animation-timeline: --speakers-grid;
-      animation-name: parallax;
-      animation-range: entry 100lvh cover calc(100% - 100lvh);
-      animation-fill-mode: both;
+    @supports (animation-timeline: --speakers-grid) {
+      &:nth-child(2) {
+        position: sticky;
+        animation-timeline: --speakers-grid;
+        animation-name: parallax;
+        animation-range: entry 100lvh cover calc(100% - 100lvh);
+        animation-fill-mode: both;
+        --column-delay: 0.2s;
+      }
+      &:nth-child(3) {
+        --column-delay: 0.3s;
+      }
     }
   }
 }
@@ -220,10 +238,11 @@ p+p {
   position: relative;
   transition: opacity 0.4s ease-out;
   overflow: clip;
-  
+
   @media (prefers-reduced-motion: no-preference) {
-    transition: transform 0.4s var(--stagger) var(--ease), opacity 0.4s var(--stagger) var(--ease);
     --stagger: calc(sibling-index() * .05s);
+    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+    transition-delay: calc(var(--stagger) + var(--column-delay));
 
     @starting-style {
       transform: translateY(4vw);
@@ -275,26 +294,39 @@ p+p {
 
 
 .speaker-header {
-  display: grid;
-  grid-template-columns: 50% auto auto;
-  grid-template-rows: 1fr auto;
-
+  display: flex;
+  flex-wrap: wrap;
   padding: var(--padding-small);
   width: 100%;
 
-  @media (max-width: 1280px) {
-    gap: var(--padding);
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    padding: 0;
   }
 
   .speaker-header-info {
-    grid-column: 1 / 2;
-    grid-row: 1;
-    padding: var(--padding);
-    width: 100%;
+    position: sticky;
+    top: var(--padding-small);
     z-index: 1;
 
+    height: calc(100svh - var(--padding-small) * 2);
+    width: 50%;
+    padding: var(--padding);
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
     .speaker-info {
+      max-width: 800px;
       margin-top: 2em;
+
+      @media (max-width: 1024px) {
+        order: -1;
+      }
 
       >*+* {
         margin-top: 0.75em;
@@ -304,11 +336,13 @@ p+p {
   }
 
   .speaker-header-text {
-    position: relative;
     z-index: 1;
-    grid-column: 1 / 3;
-    grid-row: 2;
     padding: var(--padding) var(--padding) calc(var(--padding) * 2 - var(--padding-small));
+
+    @media (max-width: 1024px) {
+      position: relative;
+      padding: 0;
+    }
 
     .title {
       view-transition-name: title;
@@ -322,15 +356,30 @@ p+p {
   }
 
   .speaker-header-image {
-    width: 100%;
-    height: calc(100svh - var(--padding-small) * 2);
-    grid-column: 2 / 4;
-    grid-row: 1 / 3;
+    width: 50%;
+    height: auto;
+
 
     img {
+      display: block;
       width: 100%;
-      height: 100%;
       object-fit: cover;
+      aspect-ratio: 3/4;
+    }
+
+    @media (max-width: 1024px) {
+      order: -1;
+      width: 100%;
+      height: unset;
+      padding: var(--padding-small);
+
+      img {
+        aspect-ratio: 1;
+      }
     }
   }
+}
+
+pre {
+  overflow-x: auto;
 }
