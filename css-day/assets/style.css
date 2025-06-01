@@ -172,18 +172,10 @@ p+p {
   }
 
   .title {
-    @media (prefers-reduced-motion: no-preference) {
-      view-transition-name: title;
-    }
-
     padding-bottom: 1rem;
   }
 
   .talk-title {
-    @media (prefers-reduced-motion: no-preference) {
-      view-transition-name: talk-title;
-    }
-
     padding-bottom: 1rem;
   }
 }

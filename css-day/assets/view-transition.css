@@ -5,22 +5,32 @@
 
 /* 1. setting view-transition names if user has no preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
-  /* 2. set view-transition-class for title and talk title */
-  /* .large-titles .title,
+
+  /* 2. set view-transition-names and class for title and talk title */
+  /* .title {
+    view-transition-name: title;
+  }
+
+  .talk-title {
+    view-transition-name: talk-title;
+  }
+
+  .large-titles .title,
   .large-titles .talk-title {
     view-transition-class: text-animation;
   } */
+
   /* 3. use attribute selector to set view-transition-name */
   /* [style*='--vt'] {
     view-transition-name: var(--vt);
   } */
-  
+
   /* 4. set view-transition-class for speaker card (overview page) and speaker header image (speaker page) */
   /* .speaker-card,
   .speaker-header-image img {
     view-transition-class: speaker-card;
   } */
-  
+
   /* .date {
     @media (min-width: 1025px) {
       [style*='--vt'] {
@@ -34,38 +44,38 @@
       view-transition-class: code-character;
     }
   } */
-   
+
 }
 
 
 /* we're creating styles that are only active when the view transition type is title-animation */
 html:active-view-transition-type(title-animation) {
-  /* 1. By default the view transition pseudo element causes the page to be unclickable, for this specific transition we want to keep it clickable */
-  /* &::view-transition {
-    pointer-events: none;
-  } */
-  
-  /* 2. We're setting a mask on the group using mask-image */
+
+  /* 1. We're setting a mask on the group using mask-image */
   /* &::view-transition-group(.text-animation) {
     mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
   } */
-  
-  /* 3. We're setting some defaults for the animation */
+
+  /* 2. We're setting some defaults for the animation */
   /* &::view-transition-old(.text-animation),
   &::view-transition-new(.text-animation) {
     animation-duration: 0.3s;
     animation-timing-function: var(--ease);
   } */
-  
-  /* 4. The new item needs to animatie from bottom in */
+
+  /* 3. The new item needs to animatie from bottom in */
   /* &::view-transition-new(.text-animation) {
     animation-name: bottom-in;
   } */
-  /* 5. The old item needs to animate to top out */
+  /* 4. The old item needs to animate to top out */
   /* &::view-transition-old(.text-animation) {
     animation-name: top-out;
   }  */
 
+  /* 5. By default the view transition pseudo element causes the page to be unclickable, for this specific transition we want to keep it clickable */
+  /* &::view-transition {
+    pointer-events: none;
+  } */
 
   /* 6. We need to disable the root view transitions and all the other view transitions on the page to make the page remain responsive */
   /* &:root,
@@ -82,7 +92,7 @@ html:active-view-transition-type(title-animation) {
   from {
     transform: translateY(100%);
   }
-  
+
   to {
     transform: translateY(0);
   }
@@ -92,11 +102,12 @@ html:active-view-transition-type(title-animation) {
   from {
     transform: translateY(0);
   }
-  
+
   to {
     transform: translateY(-100%);
   }
 }
+
 /* 1. set view transition @rule so page transitions can be animated */
 /* @view-transition {
   navigation: auto;
