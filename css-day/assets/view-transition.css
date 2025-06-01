@@ -70,11 +70,6 @@ html:active-view-transition-type(speaker-to-overview) {
 
   &::view-transition-group(.text-animation) {
     mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
-    transform-style: preserve-3d;
-  }
-
-  &::view-transition-image-pair(.text-animation) {
-    perspective: 1000px;
   }
 
   &::view-transition-old(.text-animation),
@@ -94,34 +89,22 @@ html:active-view-transition-type(speaker-to-overview) {
 
 
 @keyframes out-in {
-  0% {
+  from {
     translate: 0 100%;
-    transform: rotateX(-90deg);
   }
 
-  70% {
-    transform: rotateX(0deg);
-  }
-
-  100% {
+  to {
     translate: 0 0;
-    transform: rotateX(0deg);
   }
 }
 
 @keyframes in-out {
-  0% {
+  from {
     translate: 0 0;
-    transform: rotateX(0deg);
   }
 
-  30% {
-    transform: rotateX(0deg);
-  }
-
-  100% {
+  to {
     translate: 0 -100%;
-    transform: rotateX(90deg);
   }
 }
 
