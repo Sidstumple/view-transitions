@@ -23,7 +23,7 @@ const isOverview = (path) => {
 
 const isSpeaker = (path) => {
   console.log(path, 'speaker check')
-  return path.includes('/speakers/')
+  return path.includes('speakers')
 }
 
 window.addEventListener('pagereveal', async (e) => {
