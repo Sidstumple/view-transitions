@@ -2,83 +2,71 @@
   --ease: cubic-bezier(0.12, 0, 0.39, 0);
   --ease-out: cubic-bezier(0.61, 1, 0.88, 1);
 }
-
+/* we're creating styles that are only active when the view transition type is title-animation */
 html:active-view-transition-type(title-animation) {
   /* 1. By default the view transition pseudo element causes the page to be unclickable, for this specific transition we want to keep it clickable */
-  &::view-transition {
+  /* &::view-transition {
     pointer-events: none;
-  }
+  } */
   
   /* 2. We're setting a mask on the group using mask-image */
-  &::view-transition-group(.text-animation) {
+  /* &::view-transition-group(.text-animation) {
     mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
-  }
+  } */
   
-  
-  &::view-transition-old(.text-animation),
+  /* 3. We're setting some defaults for the animation */
+  /* &::view-transition-old(.text-animation),
   &::view-transition-new(.text-animation) {
     animation-duration: 0.3s;
     animation-timing-function: var(--ease);
-  }
+  } */
   
-  &::view-transition-new(.text-animation) {
+  /* 4. The new item needs to animatie from bottom in */
+  /* &::view-transition-new(.text-animation) {
     animation-name: out-in;
-  }
-  
-  &::view-transition-old(.text-animation) {
+  } */
+  /* 5. The old item needs to animate to top out */
+  /* &::view-transition-old(.text-animation) {
     animation-name: in-out;
-  } 
+  }  */
 
 
-  /* 5. We need to disable the root view transitions and all the other view transitions on the page to make the page remain responsive */
-  &:root,
+  /* 6. We need to disable the root view transitions and all the other view transitions on the page to make the page remain responsive */
+  /* &:root,
   [style*='--vt'] {
     view-transition-name: none !important;
-  }
-  /* 6. View transitions also have a stacking context */
-  &::view-transition-group(.text-animation) {
+  } */
+  /* 7. View transitions also have a stacking context */
+  /* &::view-transition-group(.text-animation) {
     z-index: 1;
-  }
+  } */
 }
 
-
-
 @keyframes out-in {
-  0% {
+  from {
     translate: 0 100%;
-    transform: rotateX(-90deg);
   }
   
-  70% {
-    transform: rotateX(0deg);
-  }
-  
-  100% {
+  to {
     translate: 0 0;
-    transform: rotateX(0deg);
   }
 }
 
 @keyframes in-out {
-  0% {
+  from {
     translate: 0 0;
-    transform: rotateX(0deg);
   }
   
-  30% {
-    transform: rotateX(0deg);
-  }
-  
-  100% {
+  to {
     translate: 0 -100%;
-    transform: rotateX(90deg);
   }
 }
-
+/* 1. set view transition @rule so page transitions can be animated */
 /* @view-transition {
   navigation: auto;
 } */
 
+/* setting view-transition names if  */
 @media (prefers-reduced-motion: no-preference) {
   [style*='--vt'] {
     view-transition-name: var(--vt);
@@ -89,7 +77,7 @@ html:active-view-transition-type(title-animation) {
     view-transition-class: speaker-card;
   }
   
-  .date {
+  /* .date {
     @media (min-width: 1025px) {
       [style*='--vt'] {
         view-transition-class: code-prop-value;
@@ -101,7 +89,7 @@ html:active-view-transition-type(title-animation) {
     [style*='--vt: code-open-bracket'] {
       view-transition-class: code-character;
     }
-  }
+  } */
   
   .large-titles .title,
   .large-titles .talk-title {
