@@ -5,6 +5,9 @@
 
 /* 1. setting view-transition names if user has no preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
+  [style*='--vt'] {
+    view-transition-name: var(--vt);
+  }
 
   /* 2. set view-transition-names and class for title and talk title */
   /* .title {
@@ -20,17 +23,14 @@
     view-transition-class: text-animation;
   } */
 
-  /* 3. use attribute selector to set view-transition-name */
-  /* [style*='--vt'] {
-    view-transition-name: var(--vt);
-  } */
-
-  /* 4. set view-transition-class for speaker card (overview page) and speaker header image (speaker page) */
+  
+  /* 3. speaker cards stuff: */
   /* .speaker-card,
   .speaker-header-image img {
     view-transition-class: speaker-card;
   } */
-
+  
+  /* 4. code string stuff: */
   /* .date {
     @media (min-width: 1025px) {
       [style*='--vt'] {
@@ -81,10 +81,6 @@ html:active-view-transition-type(title-animation) {
   /* &:root,
   [style*='--vt'] {
     view-transition-name: none !important;
-  } */
-  /* 7. View transitions also have a stacking context */
-  /* &::view-transition-group(.text-animation) {
-    z-index: 1;
   } */
 }
 
