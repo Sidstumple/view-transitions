@@ -17,12 +17,10 @@ const determineTransitionType = (from, to) => {
 }
 
 const isOverview = (path) => {
-  console.log(path, 'overview check')
   return path === 'css-day'
 }
 
 const isSpeaker = (path) => {
-  console.log(path, 'speaker check')
   return path.includes('speakers')
 }
 
