@@ -381,5 +381,7 @@ p+p {
 }
 
 pre {
-  overflow-x: auto;
+  @media (max-width: 1024px) {
+    overflow-x: auto;
+  }
 }
