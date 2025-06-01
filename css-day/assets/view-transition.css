@@ -6,10 +6,10 @@
 /* 1. setting view-transition names if user has no preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
   /* 2. set view-transition-class for title and talk title */
-  .large-titles .title,
+  /* .large-titles .title,
   .large-titles .talk-title {
     view-transition-class: text-animation;
-  }
+  } */
   /* 3. use attribute selector to set view-transition-name */
   /* [style*='--vt'] {
     view-transition-name: var(--vt);
@@ -59,11 +59,11 @@ html:active-view-transition-type(title-animation) {
   
   /* 4. The new item needs to animatie from bottom in */
   /* &::view-transition-new(.text-animation) {
-    animation-name: out-in;
+    animation-name: bottom-in;
   } */
   /* 5. The old item needs to animate to top out */
   /* &::view-transition-old(.text-animation) {
-    animation-name: in-out;
+    animation-name: top-out;
   }  */
 
 
@@ -78,23 +78,23 @@ html:active-view-transition-type(title-animation) {
   } */
 }
 
-@keyframes out-in {
+@keyframes bottom-in {
   from {
-    translate: 0 100%;
+    transform: translateY(100%);
   }
   
   to {
-    translate: 0 0;
+    transform: translateY(0);
   }
 }
 
-@keyframes in-out {
+@keyframes top-out {
   from {
-    translate: 0 0;
+    transform: translateY(0);
   }
   
   to {
-    translate: 0 -100%;
+    transform: translateY(-100%);
   }
 }
 /* 1. set view transition @rule so page transitions can be animated */
@@ -108,22 +108,22 @@ html:active-view-transition-type(title-animation) {
 html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
   /* 2. We're setting some defaults for the root view transition */
-  &::view-transition-old(root),
+  /* &::view-transition-old(root),
   &::view-transition-new(root) {
     animation-duration: 0.1s;
     animation-delay: 0.6s;
     animation-timing-function: var(--ease);
-  }
+  } */
 
   /* 3. setting defaults for speaker card group */
-  &::view-transition-group(.speaker-card) {
+  /* &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
     animation-timing-function: var(--ease);
     overflow: hidden;
-  }
+  } */
 
   /* 4. setting defaults for speaker card old and new, aspect ratio things */
-  &::view-transition-old(.speaker-card),
+  /* &::view-transition-old(.speaker-card),
   &::view-transition-new(.speaker-card) {
     animation: none;
     opacity: 1;
@@ -131,32 +131,32 @@ html:active-view-transition-type(speaker-to-overview) {
     height: 100%;
     object-fit: cover;
     object-position: center;
-  }
+  } */
 
   /* 5. when the old speaker card is an only child it means it wasn't clicked, so we need to animate them out */
-  &::view-transition-old(.speaker-card):only-child {
+  /* &::view-transition-old(.speaker-card):only-child {
     animation-name: scale-out;
     animation-duration: 0.3s;
     animation-delay: calc(var(--index) * 0.03s);
     animation-timing-function: var(--ease);
     opacity: 1;
-  }
+  } */
 
   /* 6. when the new speaker card is an only child it means it wasn't active on the previous page, so we need to animate them in */
-  &::view-transition-new(.speaker-card):only-child {
+  /* &::view-transition-new(.speaker-card):only-child {
     animation-name: scale-in;
     animation-duration: 0.3s;
     animation-delay: calc(var(--index) * 0.03s + 0.35s);
     animation-timing-function: var(--ease);
     opacity: 1;
-  }
+  } */
 
   /* 7. setting defaults and delays for text animation group */
-  &::view-transition-group(.text-animation) {
+  /* &::view-transition-group(.text-animation) {
     animation-duration: 0.3s;
     animation-delay: 0.3s;
     animation-timing-function: var(--ease);
-  }
+  } */
 
   /* CODE */
   /* &::view-transition-group(.code-prop-value) {
