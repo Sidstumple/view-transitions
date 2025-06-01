@@ -17,7 +17,6 @@ const determineTransitionType = (from, to) => {
 }
 
 const isOverview = (path) => {
-  path = path.replace('/', '')
   console.log(path, 'overview check')
   return path === 'css-day'
 }
@@ -47,7 +46,7 @@ window.addEventListener('pagereveal', async (e) => {
 
 
 const cleanUpURL = (path) => {
-  path = path.replace('/', '')
-  path = path.replace('/index.html', '').replace('.html', '').replace('view-transitions', '')
+  path = path.replaceAll('/', '')
+  path = path.replaceAll('/index.html', '').replaceAll('.html', '').replace('view-transitions', '')
   return path
 }
