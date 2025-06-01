@@ -3,6 +3,13 @@
   --ease-out: cubic-bezier(0.61, 1, 0.88, 1);
 }
 
+html::view-transition-group(*),
+html::view-transition-old(*),
+html::view-transition-new(*) {
+  animation-fill-mode: both !important;
+  animation-timing-function: var(--ease);
+}
+
 /* 1. setting view-transition names if user has no preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
   [style*='--vt'] {
@@ -60,7 +67,6 @@ html:active-view-transition-type(title-animation) {
   /* &::view-transition-old(.text-animation),
   &::view-transition-new(.text-animation) {
     animation-duration: 0.3s;
-    animation-timing-function: var(--ease);
   } */
 
   /* 3. The new item needs to animatie from bottom in */
@@ -118,14 +124,17 @@ html:active-view-transition-type(speaker-to-overview) {
   /* 2. setting defaults for speaker card group */
   /* &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
-    animation-timing-function: var(--ease);
+  } */
+
+  /* &::view-transition-old(.speaker-card),
+  &::view-transition-new(.speaker-card) {
+    animation: none;
   } */
   
   /* 3. when the old speaker card is an only child it means it wasn't clicked, so we need to animate them out */
   /* &::view-transition-old(.speaker-card):only-child {
     animation-name: scale-out;
     animation-duration: 0.3s;
-    animation-timing-function: var(--ease);
     } */
     /* animation-delay: calc(var(--index) * 0.03s); */
   
@@ -134,7 +143,6 @@ html:active-view-transition-type(speaker-to-overview) {
     animation-name: scale-in;
     animation-duration: 0.3s;
     animation-delay: 0.35s;
-    animation-timing-function: var(--ease);
     } */
     /* animation-delay: calc(var(--index) * 0.03s + 0.35s); */
   
@@ -142,7 +150,6 @@ html:active-view-transition-type(speaker-to-overview) {
   /* &::view-transition-group(.text-animation) {
     animation-duration: 0.3s;
     animation-delay: 0.3s;
-    animation-timing-function: var(--ease);
   } */
   
   /* CODE */
@@ -165,7 +172,6 @@ html:active-view-transition-type(speaker-to-overview) {
     overflow: clip;
     object-position: left;
     animation-duration: 0.4s;
-    animation-timing-function: var(--ease);
   } */
   
   /* &::view-transition-new(.code-prop-value) {
@@ -195,7 +201,6 @@ html:active-view-transition-type(speaker-to-overview) {
   &::view-transition-new(root) {
     animation-duration: 0.1s;
     animation-delay: 0.6s;
-    animation-timing-function: var(--ease);
   }
 
 } */
@@ -207,7 +212,6 @@ html:active-view-transition-type(speaker-to-overview) {
   &::view-transition-new(root) {
     animation-duration: 0.1s;
     animation-delay: 0.1s;
-    animation-timing-function: var(--ease);
   }
 } */
 
@@ -353,8 +357,3 @@ html:active-view-transition-type(speaker-to-overview) {
   --delay: 0.15s;
 }
 
-html::view-transition-group(*),
-html::view-transition-old(*),
-html::view-transition-new(*) {
-  animation-fill-mode: both !important;
-}
