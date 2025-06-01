@@ -129,19 +129,18 @@ html:active-view-transition-type(speaker-to-overview) {
   /* &::view-transition-old(.speaker-card):only-child {
     animation-name: scale-out;
     animation-duration: 0.3s;
-    animation-delay: calc(var(--index) * 0.03s);
     animation-timing-function: var(--ease);
-    opacity: 1;
-  } */
+    } */
+    /* animation-delay: calc(var(--index) * 0.03s); */
   
   /* 4. when the new speaker card is an only child it means it wasn't active on the previous page, so we need to animate them in */
   /* &::view-transition-new(.speaker-card):only-child {
     animation-name: scale-in;
     animation-duration: 0.3s;
-    animation-delay: calc(var(--index) * 0.03s + 0.35s);
+    animation-delay: 0.35s;
     animation-timing-function: var(--ease);
-    opacity: 1;
-  } */
+    } */
+    /* animation-delay: calc(var(--index) * 0.03s + 0.35s); */
   
   /* 5. setting defaults and delays for text animation group */
   /* &::view-transition-group(.text-animation) {

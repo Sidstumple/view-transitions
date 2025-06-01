@@ -36,7 +36,6 @@ window.addEventListener('pagereveal', async (e) => {
     }
     // set view transition type, default is 'normal'
     e.viewTransition.types.add(transitionType)
-    console.log(transitionType)
 
     // Cleanup after transition ran
     await e.viewTransition.finished
