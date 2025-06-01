@@ -18,6 +18,7 @@ const determineTransitionType = (from, to) => {
 
 const isOverview = (path) => {
   path = path.replace('/', '')
+  console.log(path, 'overview check')
   return path === 'css-day'
 }
 
