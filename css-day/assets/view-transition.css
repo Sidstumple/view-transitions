@@ -123,7 +123,6 @@ html:active-view-transition-type(speaker-to-overview) {
   /* &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
     animation-timing-function: var(--ease);
-    overflow: hidden;
   } */
   
   /* 3. when the old speaker card is an only child it means it wasn't clicked, so we need to animate them out */
@@ -197,6 +196,13 @@ html:active-view-transition-type(speaker-to-overview) {
     opacity: 0;
     animation: none;
   }
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 0.1s;
+    animation-delay: 0.6s;
+    animation-timing-function: var(--ease);
+  }
+
 } */
 /* exceptions for speaker-to-overview */
 /* html:active-view-transition-type(speaker-to-overview) {
@@ -207,11 +213,6 @@ html:active-view-transition-type(speaker-to-overview) {
     animation-duration: 0.1s;
     animation-delay: 0.1s;
     animation-timing-function: var(--ease);
-  }
-
-  &::view-transition-new(.speaker-card) {
-    opacity: 0;
-    animation: none;
   }
 } */
 
