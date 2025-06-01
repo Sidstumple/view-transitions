@@ -5,16 +5,21 @@
 
 /* 1. setting view-transition names if user has no preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
-  /* 2. use attribute selector to set view-transition-name */
-  [style*='--vt'] {
-    view-transition-name: var(--vt);
+  /* 2. set view-transition-class for title and talk title */
+  .large-titles .title,
+  .large-titles .talk-title {
+    view-transition-class: text-animation;
   }
+  /* 3. use attribute selector to set view-transition-name */
+  /* [style*='--vt'] {
+    view-transition-name: var(--vt);
+  } */
   
-  /* 3. set view-transition-class for speaker card (overview page) and speaker header image (speaker page) */
-  .speaker-card,
+  /* 4. set view-transition-class for speaker card (overview page) and speaker header image (speaker page) */
+  /* .speaker-card,
   .speaker-header-image img {
     view-transition-class: speaker-card;
-  }
+  } */
   
   /* .date {
     @media (min-width: 1025px) {
@@ -30,11 +35,6 @@
     }
   } */
    
-  /* 4. set view-transition-class for title and talk title */
-  .large-titles .title,
-  .large-titles .talk-title {
-    view-transition-class: text-animation;
-  }
 }
 
 
