@@ -204,7 +204,7 @@ p+p {
   }
 
   &:has(.speaker-card:hover) {
-    .speaker-card {
+    .speaker-card img {
       opacity: 0.5;
     }
   }
@@ -251,7 +251,7 @@ p+p {
     }
   }
 
-  &:hover {
+  &:hover img {
     opacity: 1 !important;
   }
 
@@ -260,6 +260,7 @@ p+p {
     width: 100%;
     aspect-ratio: 3/4;
     object-fit: cover;
+    transition: opacity 0.4s var(--ease);
   }
 
   a {
