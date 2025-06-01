@@ -1,96 +1,46 @@
-@view-transition {
-  navigation: auto;
-}
-
 :root {
   --ease: cubic-bezier(0.12, 0, 0.39, 0);
   --ease-out: cubic-bezier(0.61, 1, 0.88, 1);
 }
 
-html::view-transition-group(*),
-html::view-transition-old(*),
-html::view-transition-new(*) {
-  animation-fill-mode: both !important;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  [style*='--vt'] {
-    view-transition-name: var(--vt);
-  }
-
-  .speaker-card,
-  .speaker-header-image img {
-    view-transition-class: speaker-card;
-  }
-
-  .date {
-    [style*='--vt'] {
-      view-transition-class: code-prop-value;
-    }
-
-    @media (max-width: 1024px) {
-      [style*='--vt'] {
-        view-transition-name: none;
-      }
-    }
-
-    [style*='--vt: code-semicolon'],
-    [style*='--vt: code-colon'],
-    [style*='--vt: code-open-bracket'] {
-      view-transition-class: code-character;
-    }
-  }
-
-  .large-titles .title,
-  .large-titles .talk-title {
-    view-transition-class: text-animation;
-  }
-}
-
 html:active-view-transition-type(title-animation) {
+  /* 1. By default the view transition pseudo element causes the page to be unclickable, for this specific transition we want to keep it clickable */
   &::view-transition {
     pointer-events: none;
   }
-
-  &:root,
-  [style*='--vt'] {
-    view-transition-name: none !important;
-  }
-
-}
-
-
-&::view-transition-group(.text-animation) {
-  z-index: 1;
-}
-
-html:active-view-transition-type(title-animation),
-html:active-view-transition-type(speaker-to-overview) {
-
-
+  
+  /* 2. We're setting a mask on the group using mask-image */
   &::view-transition-group(.text-animation) {
     mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
-    transform-style: preserve-3d;
   }
-
-  &::view-transition-image-pair(.text-animation) {
-    perspective: 1000px;
-  }
-
+  
+  
   &::view-transition-old(.text-animation),
   &::view-transition-new(.text-animation) {
     animation-duration: 0.3s;
     animation-timing-function: var(--ease);
   }
-
+  
   &::view-transition-new(.text-animation) {
     animation-name: out-in;
   }
-
+  
   &::view-transition-old(.text-animation) {
     animation-name: in-out;
+  } 
+
+
+  /* 5. We need to disable the root view transitions and all the other view transitions on the page to make the page remain responsive */
+  &:root,
+  [style*='--vt'] {
+    view-transition-name: none !important;
+  }
+  /* 6. View transitions also have a stacking context */
+  &::view-transition-group(.text-animation) {
+    z-index: 1;
   }
 }
+
 
 
 @keyframes out-in {
@@ -98,11 +48,11 @@ html:active-view-transition-type(speaker-to-overview) {
     translate: 0 100%;
     transform: rotateX(-90deg);
   }
-
+  
   70% {
     transform: rotateX(0deg);
   }
-
+  
   100% {
     translate: 0 0;
     transform: rotateX(0deg);
@@ -114,16 +64,51 @@ html:active-view-transition-type(speaker-to-overview) {
     translate: 0 0;
     transform: rotateX(0deg);
   }
-
+  
   30% {
     transform: rotateX(0deg);
   }
-
+  
   100% {
     translate: 0 -100%;
     transform: rotateX(90deg);
   }
 }
+
+/* @view-transition {
+  navigation: auto;
+} */
+
+@media (prefers-reduced-motion: no-preference) {
+  [style*='--vt'] {
+    view-transition-name: var(--vt);
+  }
+  
+  .speaker-card,
+  .speaker-header-image img {
+    view-transition-class: speaker-card;
+  }
+  
+  .date {
+    @media (min-width: 1025px) {
+      [style*='--vt'] {
+        view-transition-class: code-prop-value;
+      }
+    }
+    
+    [style*='--vt: code-semicolon'],
+    [style*='--vt: code-colon'],
+    [style*='--vt: code-open-bracket'] {
+      view-transition-class: code-character;
+    }
+  }
+  
+  .large-titles .title,
+  .large-titles .talk-title {
+    view-transition-class: text-animation;
+  }
+}
+
 
 html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
@@ -380,4 +365,10 @@ html:active-view-transition-type(speaker-to-overview) {
 &::view-transition-group(code-colon-3),
 &::view-transition-group(code-semicolon-3) {
   --delay: 0.15s;
+}
+
+html::view-transition-group(*),
+html::view-transition-old(*),
+html::view-transition-new(*) {
+  animation-fill-mode: both !important;
 }
