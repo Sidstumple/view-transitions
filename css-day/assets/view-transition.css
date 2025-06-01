@@ -2,6 +2,42 @@
   --ease: cubic-bezier(0.12, 0, 0.39, 0);
   --ease-out: cubic-bezier(0.61, 1, 0.88, 1);
 }
+
+/* 1. setting view-transition names if user has no preference for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  /* 2. use attribute selector to set view-transition-name */
+  [style*='--vt'] {
+    view-transition-name: var(--vt);
+  }
+  
+  /* 3. set view-transition-class for speaker card (overview page) and speaker header image (speaker page) */
+  .speaker-card,
+  .speaker-header-image img {
+    view-transition-class: speaker-card;
+  }
+  
+  /* .date {
+    @media (min-width: 1025px) {
+      [style*='--vt'] {
+        view-transition-class: code-prop-value;
+      }
+    }
+    
+    [style*='--vt: code-semicolon'],
+    [style*='--vt: code-colon'],
+    [style*='--vt: code-open-bracket'] {
+      view-transition-class: code-character;
+    }
+  } */
+   
+  /* 4. set view-transition-class for title and talk title */
+  .large-titles .title,
+  .large-titles .talk-title {
+    view-transition-class: text-animation;
+  }
+}
+
+
 /* we're creating styles that are only active when the view transition type is title-animation */
 html:active-view-transition-type(title-animation) {
   /* 1. By default the view transition pseudo element causes the page to be unclickable, for this specific transition we want to keep it clickable */
@@ -66,41 +102,12 @@ html:active-view-transition-type(title-animation) {
   navigation: auto;
 } */
 
-/* setting view-transition names if  */
-@media (prefers-reduced-motion: no-preference) {
-  [style*='--vt'] {
-    view-transition-name: var(--vt);
-  }
-  
-  .speaker-card,
-  .speaker-header-image img {
-    view-transition-class: speaker-card;
-  }
-  
-  /* .date {
-    @media (min-width: 1025px) {
-      [style*='--vt'] {
-        view-transition-class: code-prop-value;
-      }
-    }
-    
-    [style*='--vt: code-semicolon'],
-    [style*='--vt: code-colon'],
-    [style*='--vt: code-open-bracket'] {
-      view-transition-class: code-character;
-    }
-  } */
-  
-  .large-titles .title,
-  .large-titles .talk-title {
-    view-transition-class: text-animation;
-  }
-}
 
 
+/* 1. styles only active when view transition type is overview-to-speaker or speaker-to-overview */
 html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
-
+  /* 2. We're setting some defaults for the root view transition */
   &::view-transition-old(root),
   &::view-transition-new(root) {
     animation-duration: 0.1s;
@@ -108,13 +115,14 @@ html:active-view-transition-type(speaker-to-overview) {
     animation-timing-function: var(--ease);
   }
 
-  /* SPEAKER CARD */
+  /* 3. setting defaults for speaker card group */
   &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
     animation-timing-function: var(--ease);
     overflow: hidden;
   }
 
+  /* 4. setting defaults for speaker card old and new, aspect ratio things */
   &::view-transition-old(.speaker-card),
   &::view-transition-new(.speaker-card) {
     animation: none;
@@ -125,6 +133,7 @@ html:active-view-transition-type(speaker-to-overview) {
     object-position: center;
   }
 
+  /* 5. when the old speaker card is an only child it means it wasn't clicked, so we need to animate them out */
   &::view-transition-old(.speaker-card):only-child {
     animation-name: scale-out;
     animation-duration: 0.3s;
@@ -133,6 +142,7 @@ html:active-view-transition-type(speaker-to-overview) {
     opacity: 1;
   }
 
+  /* 6. when the new speaker card is an only child it means it wasn't active on the previous page, so we need to animate them in */
   &::view-transition-new(.speaker-card):only-child {
     animation-name: scale-in;
     animation-duration: 0.3s;
@@ -141,7 +151,7 @@ html:active-view-transition-type(speaker-to-overview) {
     opacity: 1;
   }
 
-  /* TEXT ANIMATION */
+  /* 7. setting defaults and delays for text animation group */
   &::view-transition-group(.text-animation) {
     animation-duration: 0.3s;
     animation-delay: 0.3s;
@@ -149,7 +159,7 @@ html:active-view-transition-type(speaker-to-overview) {
   }
 
   /* CODE */
-  &::view-transition-group(.code-prop-value) {
+  /* &::view-transition-group(.code-prop-value) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0s;
   }
@@ -157,24 +167,21 @@ html:active-view-transition-type(speaker-to-overview) {
   &::view-transition-group(.code-character) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0.05s;
-  }
+  } */
 
 
   /* Thanks Jake! 🙏 https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/ */
-  &::view-transition-old(.code-prop-value),
+  /* &::view-transition-old(.code-prop-value),
   &::view-transition-new(.code-prop-value) {
-    /* Break aspect ratio at an element level */
     height: 100%;
-    /* But maintain it within the image itself */
     object-fit: none;
-    /* And hide parts of the image that go out of bounds */
     overflow: clip;
     object-position: left;
     animation-duration: 0.4s;
     animation-timing-function: var(--ease);
-  }
+  } */
 
-  &::view-transition-new(.code-prop-value) {
+  /* &::view-transition-new(.code-prop-value) {
     animation-name: clip-to-right;
     animation-delay: calc(var(--delay) + 0.4s);
   }
@@ -182,10 +189,11 @@ html:active-view-transition-type(speaker-to-overview) {
   &::view-transition-old(.code-prop-value) {
     animation-name: clip-from-right;
     animation-delay: var(--delay);
-  }
+  } */
 }
 
-html:active-view-transition-type(overview-to-speaker) {
+/* exceptions for overview-to-speaker */
+/* html:active-view-transition-type(overview-to-speaker) {
   &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
     animation-delay: calc(var(--index) * 0.05s + 0.1s);
@@ -195,9 +203,9 @@ html:active-view-transition-type(overview-to-speaker) {
     opacity: 0;
     animation: none;
   }
-}
-
-html:active-view-transition-type(speaker-to-overview) {
+} */
+/* exceptions for speaker-to-overview */
+/* html:active-view-transition-type(speaker-to-overview) {
   --ease: var(--ease-out);
 
   &::view-transition-old(root),
@@ -211,7 +219,7 @@ html:active-view-transition-type(speaker-to-overview) {
     opacity: 0;
     animation: none;
   }
-}
+} */
 
 
 @keyframes scale-out {
@@ -259,7 +267,7 @@ html:active-view-transition-type(speaker-to-overview) {
 
 /* The nasty stuff 🤡 */
 /* Would love to be able to do this with sibling index somehow 😎 */
-::view-transition-group(stephen-hay) {
+/* ::view-transition-group(stephen-hay) {
   --index: 0;
 }
 
@@ -325,7 +333,7 @@ html:active-view-transition-type(speaker-to-overview) {
 
 ::view-transition-group(bruce-lawson) {
   --index: 16;
-}
+} */
 
 /* More nasty stuff: 🤡 */
 
