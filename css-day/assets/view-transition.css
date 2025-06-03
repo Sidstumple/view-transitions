@@ -47,6 +47,28 @@ html::view-transition-new(*) {
   }
 }
 
+&::view-transition-group(.text-animation) {
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
+}
+
+&::view-transition-old(.text-animation),
+&::view-transition-new(.text-animation) {
+  animation-duration: 0.3s;
+  animation-timing-function: var(--ease);
+}
+
+&::view-transition-new(.text-animation) {
+  animation-name: out-in;
+}
+
+&::view-transition-old(.text-animation) {
+  animation-name: in-out;
+}
+
+&::view-transition-group(.text-animation) {
+  z-index: 1;
+}
+
 html:active-view-transition-type(title-animation) {
   &::view-transition {
     pointer-events: none;
@@ -56,36 +78,11 @@ html:active-view-transition-type(title-animation) {
   [style*='--vt'] {
     view-transition-name: none !important;
   }
-
 }
 
 
-&::view-transition-group(.text-animation) {
-  z-index: 1;
-}
-
-html:active-view-transition-type(title-animation),
-html:active-view-transition-type(speaker-to-overview) {
 
 
-  &::view-transition-group(.text-animation) {
-    mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
-  }
-
-  &::view-transition-old(.text-animation),
-  &::view-transition-new(.text-animation) {
-    animation-duration: 0.3s;
-    animation-timing-function: var(--ease);
-  }
-
-  &::view-transition-new(.text-animation) {
-    animation-name: out-in;
-  }
-
-  &::view-transition-old(.text-animation) {
-    animation-name: in-out;
-  }
-}
 
 
 @keyframes out-in {
@@ -110,14 +107,6 @@ html:active-view-transition-type(speaker-to-overview) {
 
 html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
-
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    animation-duration: 0.1s;
-    animation-delay: 0.6s;
-    animation-timing-function: var(--ease);
-  }
-
   /* SPEAKER CARD */
   &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
@@ -204,6 +193,12 @@ html:active-view-transition-type(overview-to-speaker) {
   &::view-transition-old(.speaker-card) {
     opacity: 0;
     animation: none;
+  }
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation-duration: 0.1s;
+    animation-delay: 0.6s;
+    animation-timing-function: var(--ease);
   }
 }
 
@@ -363,4 +358,55 @@ html:active-view-transition-type(speaker-to-overview) {
 &::view-transition-group(code-colon-3),
 &::view-transition-group(code-semicolon-3) {
   --delay: 0.15s;
+}
+
+html:active-view-transition-type(dialog-drag) {
+  [style*='--vt'] {
+    view-transition-name: none !important;
+  }
+
+  &::view-transition-group(dialog) {
+    z-index: 1;
+    animation-timing-function: var(--elastic-ease);
+  }
+  
+  &::view-transition-group(dialog-trigger) {
+    animation-timing-function: var(--elastic-ease);
+  }
+
+  &::view-transition-old(dialog-trigger) {
+    display: none;
+  }
+
+  &::view-transition-new(dialog-trigger) {
+    animation-name: elastic-feel-open;
+    animation-duration: 0.3s;
+  }
+}
+
+html:active-view-transition-type(dialog-closing) {
+  &::view-transition-new(dialog-trigger) {
+    animation-name: elastic-feel-close;
+    animation-duration: 0.3s;
+  }
+}
+
+@keyframes elastic-feel-open {
+  70% {
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes elastic-feel-close {
+  70% {
+    transform: translateY(0.5rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
