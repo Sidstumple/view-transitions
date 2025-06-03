@@ -380,3 +380,64 @@ pre {
     overflow-x: auto;
   }
 }
+
+
+
+.info-trigger {
+  width: max-content;
+  background-color: var(--color);
+  color: var(--background);
+  border: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.5rem 1rem 5rem;
+  
+  transition: transform 0.3s ease;
+  cursor: grab;
+  transform: translateY(4.5rem);
+  view-transition-name: dialog-trigger;
+
+  &:hover {
+    transform: translateY(4rem);
+  }
+}
+
+html.grabbing {
+  cursor: grabbing;
+  user-select: none;
+}
+dialog {
+  position: fixed;
+  bottom: 0;
+  z-index: 11;
+  view-transition-name: dialog;
+  
+  width: 100%;
+  height: max-content;
+  max-width: unset;
+  max-height: unset;
+  transform: translateY(calc(100% - 6.7em));
+  padding: 0;
+  background: none;
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  align-self: end;
+
+
+  &[open] {
+    transform: translateY(0);
+  }
+  section {
+    position: relative;
+    z-index: 1;
+    padding: var(--padding);
+    background-color: var(--color);
+    color: var(--background);
+    > * {
+      max-width: 500px;
+    }
+  }
+}

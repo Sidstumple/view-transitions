@@ -1,6 +1,8 @@
 :root {
   --ease: cubic-bezier(0.12, 0, 0.39, 0);
   --ease-out: cubic-bezier(0.61, 1, 0.88, 1);
+  --elastic-ease: cubic-bezier(0.34, 1.56, 0.64, 1),
+
 }
 
 html::view-transition-group(*),
@@ -30,13 +32,13 @@ html::view-transition-new(*) {
     view-transition-class: text-animation;
   } */
 
-  
+
   /* 3. speaker cards stuff: */
   /* .speaker-card,
   .speaker-header-image img {
     view-transition-class: speaker-card;
   } */
-  
+
   /* 4. code string stuff: */
   /* .date {
     @media (min-width: 1025px) {
@@ -54,30 +56,28 @@ html::view-transition-new(*) {
 
 }
 
+/* 1. We're setting a mask on the group using mask-image */
+/* &::view-transition-group(.text-animation) {
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
+} */
+
+/* 2. We're setting some defaults for the animation */
+/* &::view-transition-old(.text-animation),
+&::view-transition-new(.text-animation) {
+  animation-duration: 0.3s;
+} */
+
+/* 3. The new item needs to animate from bottom in */
+/* &::view-transition-new(.text-animation) {
+  animation-name: bottom-in;
+} */
+/* 4. The old item needs to animate to top out */
+/* &::view-transition-old(.text-animation) {
+  animation-name: top-out;
+}  */
 
 /* we're creating styles that are only active when the view transition type is title-animation */
 html:active-view-transition-type(title-animation) {
-
-  /* 1. We're setting a mask on the group using mask-image */
-  /* &::view-transition-group(.text-animation) {
-    mask-image: linear-gradient(to bottom, transparent, black 15%, black calc(100% - 15%), transparent);
-  } */
-
-  /* 2. We're setting some defaults for the animation */
-  /* &::view-transition-old(.text-animation),
-  &::view-transition-new(.text-animation) {
-    animation-duration: 0.3s;
-  } */
-
-  /* 3. The new item needs to animatie from bottom in */
-  /* &::view-transition-new(.text-animation) {
-    animation-name: bottom-in;
-  } */
-  /* 4. The old item needs to animate to top out */
-  /* &::view-transition-old(.text-animation) {
-    animation-name: top-out;
-  }  */
-
   /* 5. By default the view transition pseudo element causes the page to be unclickable, for this specific transition we want to keep it clickable */
   /* &::view-transition {
     pointer-events: none;
@@ -120,7 +120,7 @@ html:active-view-transition-type(title-animation) {
 /* 1. styles only active when view transition type is overview-to-speaker or speaker-to-overview */
 html:active-view-transition-type(overview-to-speaker),
 html:active-view-transition-type(speaker-to-overview) {
-  
+
   /* 2. setting defaults for speaker card group */
   /* &::view-transition-group(.speaker-card) {
     animation-duration: 0.6s;
@@ -130,40 +130,41 @@ html:active-view-transition-type(speaker-to-overview) {
   &::view-transition-new(.speaker-card) {
     animation: none;
   } */
-  
+
   /* 3. when the old speaker card is an only child it means it wasn't clicked, so we need to animate them out */
   /* &::view-transition-old(.speaker-card):only-child {
     animation-name: scale-out;
     animation-duration: 0.3s;
     } */
-    /* animation-delay: calc(var(--index) * 0.03s); */
-  
+  /* animation-delay: calc(var(--index) * 0.03s); */
+
   /* 4. when the new speaker card is an only child it means it wasn't active on the previous page, so we need to animate them in */
   /* &::view-transition-new(.speaker-card):only-child {
     animation-name: scale-in;
     animation-duration: 0.3s;
     animation-delay: 0.35s;
     } */
-    /* animation-delay: calc(var(--index) * 0.03s + 0.35s); */
-  
+  /* animation-delay: calc(var(--index) * 0.03s + 0.35s); */
+
   /* 5. setting defaults and delays for text animation group */
   /* &::view-transition-group(.text-animation) {
-    animation-duration: 0.3s;
     animation-delay: 0.3s;
   } */
-  
+
   /* CODE */
+  /* transform animation to 0s with a delay of 0.4s */
   /* &::view-transition-group(.code-prop-value) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0s;
   }
-  
-  &::view-transition-group(.code-character) {
+  */
+  /* Very quickly animate the punctiation marks: */
+  /* &::view-transition-group(.code-character) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0.05s;
   } */
-  
-  
+
+
   /* Thanks Jake! 🙏 https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/ */
   /* &::view-transition-old(.code-prop-value),
   &::view-transition-new(.code-prop-value) {
@@ -173,7 +174,7 @@ html:active-view-transition-type(speaker-to-overview) {
     object-position: left;
     animation-duration: 0.4s;
   } */
-  
+
   /* &::view-transition-new(.code-prop-value) {
     animation-name: clip-to-right;
     animation-delay: calc(var(--delay) + 0.4s);
@@ -192,29 +193,63 @@ html:active-view-transition-type(speaker-to-overview) {
     animation-duration: 0.6s;
     animation-delay: calc(var(--index) * 0.05s + 0.1s);
   }
-  
-  &::view-transition-old(.speaker-card) {
-    opacity: 0;
-    animation: none;
-  }
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    animation-duration: 0.1s;
-    animation-delay: 0.6s;
-  }
-
 } */
 /* exceptions for speaker-to-overview */
 /* html:active-view-transition-type(speaker-to-overview) {
   --ease: var(--ease-out);
-
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    animation-duration: 0.1s;
-    animation-delay: 0.1s;
-  }
 } */
 
+
+html:active-view-transition-type(dialog-drag) {
+  [style*='--vt'] {
+    view-transition-name: none !important;
+  }
+
+  &::view-transition-group(dialog) {
+    z-index: 1;
+    animation-timing-function: var(--elastic-ease);
+  }
+  
+  &::view-transition-group(dialog-trigger) {
+    animation-timing-function: var(--elastic-ease);
+  }
+
+  &::view-transition-old(dialog-trigger) {
+    display: none;
+  }
+
+  &::view-transition-new(dialog-trigger) {
+    animation-name: elastic-feel-open;
+    animation-duration: 0.3s;
+  }
+}
+
+html:active-view-transition-type(dialog-closing) {
+  &::view-transition-new(dialog-trigger) {
+    animation-name: elastic-feel-close;
+    animation-duration: 0.3s;
+  }
+}
+
+@keyframes elastic-feel-open {
+  70% {
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes elastic-feel-close {
+  70% {
+    transform: translateY(0.5rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
 
 @keyframes scale-out {
   to {
@@ -356,4 +391,3 @@ html:active-view-transition-type(speaker-to-overview) {
 &::view-transition-group(code-semicolon-3) {
   --delay: 0.15s;
 }
-

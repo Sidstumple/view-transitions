@@ -8,6 +8,7 @@
   <title>CSS Day</title>
   <script src="./assets/script.js" defer></script>
   <script src="./assets/hover-animation.js" defer></script>
+  <script src="./assets/gesture.js" defer></script>
   <script src="./assets/view-transitions.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +18,22 @@
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
 
-<body>  
+<body>
+  <dialog>
+    <button class="info-trigger">What is CSS Day?</button>
+    <section>
+      <p>On 5th and 6th of June <a href="https://cssday.nl/schedule">fourteen speakers</a> will talk about
+        the state of CSS for an audience of CSS designers, developers, spec writers, and browser vendors, who take
+        pride in what they know and do.</p>
+      <p class="call-to-action"><a href="https://cssday.nl/stream">Join the live stream</a></p>
+      <p>Want to join virtually, or listen to their wise words later? Follow
+        the <a href="https://cssday.nl/stream">live stream</a> or watch the videos on demand via Conffab for
+        €99.</p>
+      <p>Or <a href="https://cssday.nl/subscribe">subscribe to our mailing list</a> for news about the 2026
+        edition.</p>
+
+    </section>
+  </dialog>
   <main class="main">
     <section class="speakers">
       <div class="speakers-left">
@@ -30,6 +46,7 @@
 }
           </pre>
         </div>
+
         <div class="text large-titles">
           <h1 class="title xlarge-heading" data-original-title="CSS Day 2025">
             CSS Day 2025
@@ -48,7 +65,8 @@
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Adam Argyle" data-talk-title="Level up your scroll UX" style="--vt: adam-argyle">
+          <div class="speaker-card" data-name="Adam Argyle" data-talk-title="Level up your scroll UX"
+            style="--vt: adam-argyle">
             <img src="./assets/img/adam.jpg" alt="Adam Argyle" />
             <a href="speakers/adam-argyle.html">
               <span class="sr-only">Adam Argyle</span>
@@ -71,7 +89,8 @@
           </div>
 
           <div class="speaker-card" data-name="Cyd Stumpel"
-            data-talk-title="CSS tried to come for my job — A practical guide to View Transitions for creative developers" style="--vt: cyd-stumpel">
+            data-talk-title="CSS tried to come for my job — A practical guide to View Transitions for creative developers"
+            style="--vt: cyd-stumpel">
             <img src="./assets/img/cyd.jpg" alt="Cyd Stumpel" />
             <a href="speakers/cyd-stumpel.html">
               <span class="sr-only">Cyd Stumpel</span>
@@ -87,21 +106,24 @@
           </div>
         </div>
         <div class="column">
-          <div class="speaker-card" data-name="Rachel Andrew" data-talk-title="Multicol and fragmentation" style="--vt: rachel-andrew">
+          <div class="speaker-card" data-name="Rachel Andrew" data-talk-title="Multicol and fragmentation"
+            style="--vt: rachel-andrew">
             <img src="./assets/img/rachel.jpg" alt="Rachel Andrew" />
             <a href="speakers/rachel-andrew.html">
               <span class="sr-only">Rachel Andrew</span>
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Brad Frost" data-talk-title="Advanced Design Tokens workshop" style="--vt: brad-frost">
+          <div class="speaker-card" data-name="Brad Frost" data-talk-title="Advanced Design Tokens workshop"
+            style="--vt: brad-frost">
             <img src="./assets/img/brad.jpg" alt="Brad Frost" />
             <a href="speakers/brad-frost.html">
               <span class="sr-only">Brad Frost</span>
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Ian Frost" data-talk-title="Advanced Design Tokens workshop" style="--vt: ian-frost">
+          <div class="speaker-card" data-name="Ian Frost" data-talk-title="Advanced Design Tokens workshop"
+            style="--vt: ian-frost">
             <img src="./assets/img/ian.jpg" alt="Ian Frost" />
             <a href="speakers/ian-frost.html">
               <span class="sr-only">Ian Frost</span>
@@ -123,28 +145,32 @@
           </div>
         </div>
         <div class="column">
-          <div class="speaker-card" data-name="Ahmad Shadeed" data-talk-title="Smart layouts" style="--vt: ahmad-shadeed">
+          <div class="speaker-card" data-name="Ahmad Shadeed" data-talk-title="Smart layouts"
+            style="--vt: ahmad-shadeed">
             <img src="./assets/img/ahmad.jpg" alt="Ahmad Shadeed" />
             <a href="speakers/ahmad-shadeed.html">
               <span class="sr-only">Ahmad Shadeed</span>
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Tim Nguyen" data-talk-title="Form control styling" style="--vt: tim-nguyen">
+          <div class="speaker-card" data-name="Tim Nguyen" data-talk-title="Form control styling"
+            style="--vt: tim-nguyen">
             <img src="./assets/img/tim.jpg" alt="Tim Nguyen" />
             <a href="speakers/tim-nguyen.html">
               <span class="sr-only">Tim Nguyen</span>
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Amit Sheen" data-talk-title="Building a Computer with CSS" style="--vt: amit-sheen">
+          <div class="speaker-card" data-name="Amit Sheen" data-talk-title="Building a Computer with CSS"
+            style="--vt: amit-sheen">
             <img src="./assets/img/amit.jpg" alt="Amit Sheen" />
             <a href="speakers/amit-sheen.html">
               <span class="sr-only">Amit Sheen</span>
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Ana Rodrigues" data-talk-title="Refactoring CSS" style="--vt: ana-rodrigues">
+          <div class="speaker-card" data-name="Ana Rodrigues" data-talk-title="Refactoring CSS"
+            style="--vt: ana-rodrigues">
             <img src="./assets/img/ana.jpg" alt="Ana Rodrigues" />
             <a href="speakers/ana-rodrigues.html">
               <span class="sr-only">Ana Rodrigues</span>
@@ -159,7 +185,8 @@
             </a>
           </div>
 
-          <div class="speaker-card" data-name="Bruce Lawson" data-talk-title="The goose and the common" style="--vt: bruce-lawson">
+          <div class="speaker-card" data-name="Bruce Lawson" data-talk-title="The goose and the common"
+            style="--vt: bruce-lawson">
             <img src="./assets/img/bruce.jpg" alt="Bruce Lawson" />
             <a href="speakers/bruce-lawson.html">
               <span class="sr-only">Bruce Lawson</span>
