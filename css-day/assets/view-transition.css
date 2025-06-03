@@ -200,7 +200,7 @@ html:active-view-transition-type(speaker-to-overview) {
 } */
 
 
-html:active-view-transition-type(dialog-drag) {
+/* html:active-view-transition-type(dialog-drag) {
   [style*='--vt'] {
     view-transition-name: none !important;
   }
@@ -229,7 +229,7 @@ html:active-view-transition-type(dialog-closing) {
     animation-name: elastic-feel-close;
     animation-duration: 0.3s;
   }
-}
+} */
 
 @keyframes elastic-feel-open {
   70% {
