@@ -146,19 +146,14 @@ html:active-view-transition-type(speaker-to-overview) {
     } */
   /* animation-delay: calc(var(--index) * 0.03s + 0.35s); */
 
-  /* 5. setting defaults and delays for text animation group */
-  /* &::view-transition-group(.text-animation) {
-    animation-delay: 0.3s;
-  } */
-
   /* CODE */
-  /* transform animation to 0s with a delay of 0.4s */
+  /* 5. transform animation to 0s with a delay of 0.4s */
   /* &::view-transition-group(.code-prop-value) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0s;
   }
   */
-  /* Very quickly animate the punctiation marks: */
+  /* 6. Very quickly animate the punctiation marks: */
   /* &::view-transition-group(.code-character) {
     animation-delay: calc(var(--delay) + 0.4s);
     animation-duration: 0.05s;
@@ -201,7 +196,10 @@ html:active-view-transition-type(speaker-to-overview) {
 
 
 /* html:active-view-transition-type(dialog-drag) {
-  [style*='--vt'] {
+  [style*='--vt'],
+  .title,
+  .talk-title
+   {
     view-transition-name: none !important;
   }
 
@@ -296,7 +294,7 @@ html:active-view-transition-type(dialog-closing) {
 
 /* The nasty stuff 🤡 */
 /* Would love to be able to do this with sibling index somehow 😎 */
-/* ::view-transition-group(stephen-hay) {
+::view-transition-group(stephen-hay) {
   --index: 0;
 }
 
@@ -362,7 +360,7 @@ html:active-view-transition-type(dialog-closing) {
 
 ::view-transition-group(bruce-lawson) {
   --index: 16;
-} */
+}
 
 /* More nasty stuff: 🤡 */
 
