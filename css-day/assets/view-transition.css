@@ -206,15 +206,17 @@ html:active-view-transition-type(speaker-to-overview) {
   --ease: var(--ease-out);
 }
 
-
 html:active-view-transition-type(dialog-drag) {
-  [style*='--vt'] {
+  [style*='--vt'],
+  .title,
+  .talk-title {
     view-transition-name: none !important;
   }
 
   &::view-transition-group(dialog) {
     z-index: 1;
     animation-timing-function: var(--elastic-ease);
+    animation-name: -ua-view-transition-group-anim-dialog, elastic-scale;
   }
 
   &::view-transition-group(dialog-trigger) {
@@ -235,6 +237,16 @@ html:active-view-transition-type(dialog-closing) {
   &::view-transition-new(dialog-trigger) {
     animation-name: elastic-feel-close;
     animation-duration: 0.3s;
+  }
+}
+
+@keyframes elastic-scale {
+  70% {
+    scale: 1.1 1;
+  }
+
+  100% {
+    scale: 1 1;
   }
 }
 

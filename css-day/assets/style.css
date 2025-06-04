@@ -425,7 +425,9 @@ dialog {
   align-items: center;
   justify-content: end;
   align-self: end;
-
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 
   &[open] {
     transform: translateY(0);
