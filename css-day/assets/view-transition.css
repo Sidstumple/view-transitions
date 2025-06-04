@@ -195,19 +195,20 @@ html:active-view-transition-type(speaker-to-overview) {
 } */
 
 
-/* html:active-view-transition-type(dialog-drag) {
+
+html:active-view-transition-type(dialog-drag) {
   [style*='--vt'],
   .title,
-  .talk-title
-   {
+  .talk-title {
     view-transition-name: none !important;
   }
 
   &::view-transition-group(dialog) {
     z-index: 1;
     animation-timing-function: var(--elastic-ease);
+    animation-name: -ua-view-transition-group-anim-dialog, elastic-scale;
   }
-  
+
   &::view-transition-group(dialog-trigger) {
     animation-timing-function: var(--elastic-ease);
   }
@@ -227,7 +228,17 @@ html:active-view-transition-type(dialog-closing) {
     animation-name: elastic-feel-close;
     animation-duration: 0.3s;
   }
-} */
+}
+
+@keyframes elastic-scale {
+  70% {
+    scale: 1.1 1;
+  }
+
+  100% {
+    scale: 1 1;
+  }
+}
 
 @keyframes elastic-feel-open {
   70% {
